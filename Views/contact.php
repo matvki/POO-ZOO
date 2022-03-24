@@ -1,4 +1,4 @@
 <?php
 
 
-$router = new Router;
+echo 'contact';

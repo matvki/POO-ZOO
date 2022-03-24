@@ -43,6 +43,8 @@ class Animal
         $this->environment  = $result['environment'];
         $this->death        = $result['death'];
         $this->information  = $result['information'];
+
+        $pdo = null;
     }
 
     // Getter
