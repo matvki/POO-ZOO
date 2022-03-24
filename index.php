@@ -1,15 +1,20 @@
 <?php
-
-// require 'Classes/Autoloader.php';
-// App\Autoloader::register();
-
-use App\Animal;
-use App\Caretaker;
-
 require_once 'vendor/autoload.php';
 
-$animal = new Animal(1);
-var_dump($animal);
+$request = $_SERVER['REQUEST_URI'];
 
-$caretaker = new Caretaker(1);
-var_dump($caretaker);
+switch (substr($request, 4, strlen($request)-4 )) {
+    case '/' :
+        require __DIR__ . '/views/home.php';
+        break;
+    case '' :
+        require __DIR__ . '/views/index.php';
+        break;
+    case '/about' :
+        require __DIR__ . '/views/about.php';
+        break;
+    default:
+        http_response_code(404);
+        require __DIR__ . '/views/404.php';
+        break;
+}
