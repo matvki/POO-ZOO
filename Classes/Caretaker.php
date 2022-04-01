@@ -12,10 +12,10 @@ class Caretaker
     private string $arrival;
     private string $gender;
     private int $number;
+    private int $nbrEnclosureMax;
     private string $email;
     private string $picture;
     private string $specialty;
-//    private int $nbrEnclosure; // le recuperer en fetchan tout les annimaux qont elle s'occupe et les compter
     private int|null $superior;
     private string|null $exit;
     private string|null $information;
@@ -29,19 +29,19 @@ class Caretaker
         $query->execute();
         $result = $query->fetch();
 
-        $this->id           = $result['id'];
-        $this->firstname     = $result['firstname'];
-        $this->lastname     = $result['lastname'];
-        $this->arrival      = $result['arrival'];
-        $this->gender       = $result['gender'];
-        $this->number       = $result['number'];
-        $this->email        = $result['email'];
-        $this->picture      = $result['picture'];
-        $this->specialty    = $result['specialty'];
-//        $this->nbrEnclosure = $result['nbrEnclosure'];
-        $this->superior     = $result['superior'];
-        $this->exit         = $result['exit'];
-        $this->information  = $result['information'];
+        $this->id               = $result['id'];
+        $this->firstname        = $result['firstname'];
+        $this->lastname         = $result['lastname'];
+        $this->arrival          = $result['arrival'];
+        $this->gender           = $result['gender'];
+        $this->number           = $result['number'];
+        $this->email            = $result['email'];
+        $this->picture          = $result['picture'];
+        $this->specialty        = $result['specialty'];
+        $this->superior         = $result['superior'];
+        $this->exit             = $result['exit'];
+        $this->information      = $result['information'];
+        $this->nbrEnclosureMax  =$result['nbrEnclosureMax'];
 
         $pdo = null;
     }
@@ -122,35 +122,35 @@ class Caretaker
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNbrEnclosure(): int
-    {
-        return $this->nbrEnclosure;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSuperior(): int
+    public function getSuperior(): int|null
     {
         return $this->superior;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getExit(): string
+    public function getExit(): string|null
     {
         return $this->exit;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInformation(): string
+    public function getInformation(): string|null
     {
         return $this->information;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbrEnclosureMax(): int
+    {
+        return $this->nbrEnclosureMax;
     }
 
     // Setter
@@ -228,26 +228,34 @@ class Caretaker
     }
 
     /**
-     * @param int $superior
+     * @param int|null $superior
      */
-    public function setSuperior(int $superior): void
+    public function setSuperior(int|null $superior): void
     {
         $this->superior = $superior;
     }
 
     /**
-     * @param string $exit
+     * @param string|null $exit
      */
-    public function setExit(string $exit): void
+    public function setExit(string|null $exit): void
     {
         $this->exit = $exit;
     }
 
     /**
-     * @param string $information
+     * @param string|null $information
      */
-    public function setInformation(string $information): void
+    public function setInformation(string|null $information): void
     {
         $this->information = $information;
+    }
+
+    /**
+     * @param int $nbrEnclosureMax
+     */
+    public function setNbrEnclosureMax(int $nbrEnclosureMax): void
+    {
+        $this->nbrEnclosureMax = $nbrEnclosureMax;
     }
 }

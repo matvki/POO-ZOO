@@ -7,9 +7,26 @@ use Models\BDD;
 class Enclosure
 {
     private int $id;
-    private string $environnement;
+    private string $environment;
     private int $area;
     private int $capacity;
+
+    public function __construct($id)
+    {
+        $pdo = new BDD();
+        $pdo = $pdo->connect();
+        $query = $pdo->prepare('Select * from Enclosure where id like :id');
+        $query->bindParam('id', $id);
+        $query->execute();
+        $result = $query->fetch();
+
+        $this->id           = $result['id'];
+        $this->environment  = $result['environment'];
+        $this->area         = $result['area'];
+        $this->capacity     = $result['capacity'];
+
+        $pdo = null;
+    }
 
     // Getter
 
@@ -24,9 +41,9 @@ class Enclosure
     /**
      * @return string
      */
-    public function getEnvironnement(): string
+    public function getEnvironment(): string
     {
-        return $this->environnement;
+        return $this->environment;
     }
 
     /**
@@ -46,25 +63,34 @@ class Enclosure
     }
 
     /**
-     * @return bool
+     * @return array
      */
-    public function getEmpty(): bool
+    public function getAnimals(): array
     {
+        $array = array();
         $pdo = new BDD();
         $pdo = $pdo->connect();
 
-        $pdo->query('Select ');
-        return false;
+        $query = $pdo->query('Select animal from AnimalEnclosure where enclosure = \''.$this->id.'\'');
+        $query->execute();
+        $result =  $query->fetchAll();
+
+        foreach ($result as $animal){
+            $animal = new Animal($animal['animal']);
+
+            $array[] = $animal;
+        }
+        return $array;
     }
 
     // Setter
 
     /**
-     * @param string $environnement
+     * @param string $environment
      */
-    public function setEnvironnement(string $environnement): void
+    public function setEnvironnement(string $environment): void
     {
-        $this->environnement = $environnement;
+        $this->environment = $environment;
     }
 
     /**

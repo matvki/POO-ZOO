@@ -14,7 +14,6 @@ class Animal
     private string $arrival;
     private string $gender;
     private string $parents;
-    private string $picture;
     private string $food;
     private string $treatment;
     private string $environment;
@@ -25,24 +24,22 @@ class Animal
     {
         $pdo = new BDD();
         $pdo = $pdo->connect();
-        $query = $pdo->prepare('Select * from Animals where id like :id');
-        $query->bindParam('id', $id);
+        $query = $pdo->prepare('Select * from Animals where id like \'' . $id . '\'');
         $query->execute();
         $result = $query->fetch();
 
-        $this->id           = $result['id'];
-        $this->name         = $result['name'];
-        $this->age          = $result['age'];
-        $this->specie       = $result['specie'];
-        $this->arrival      = $result['arrival'];
-        $this->gender       = $result['gender'];
-        $this->parents      = $result['parents'];
-        $this->picture      = $result['picture'];
-        $this->food         = $result['food'];
-        $this->treatment    = $result['treatment'];
-        $this->environment  = $result['environment'];
-        $this->death        = $result['death'];
-        $this->information  = $result['information'];
+        $this->id = $result['id'];
+        $this->name = $result['name'];
+        $this->age = $result['age'];
+        $this->specie = $result['specie'];
+        $this->arrival = $result['arrival'];
+        $this->gender = $result['gender'];
+        $this->parents = $result['parents'];
+        $this->food = $result['food'];
+        $this->treatment = $result['treatment'];
+        $this->environment = $result['environment'];
+        $this->death = $result['death'];
+        $this->information = $result['information'];
 
         $pdo = null;
     }
@@ -108,14 +105,6 @@ class Animal
     /**
      * @return string
      */
-    public function getPicture(): string
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @return string
-     */
     public function getFood(): string
     {
         return $this->food;
@@ -138,17 +127,17 @@ class Animal
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDeath(): string
+    public function getDeath(): string|null
     {
         return $this->death;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInformation(): string
+    public function getInformation(): string|null
     {
         return $this->information;
     }
@@ -204,14 +193,6 @@ class Animal
     }
 
     /**
-     * @param string $picture
-     */
-    public function setPicture(string $picture): void
-    {
-        $this->picture = $picture;
-    }
-
-    /**
      * @param string $food
      */
     public function setFood(string $food): void
@@ -236,17 +217,17 @@ class Animal
     }
 
     /**
-     * @param string $death
+     * @param string|null $death
      */
-    public function setDeath(string $death): void
+    public function setDeath(string|null $death): void
     {
         $this->death = $death;
     }
 
     /**
-     * @param string $information
+     * @param string|null $information
      */
-    public function setInformation(string $information): void
+    public function setInformation(string|null $information): void
     {
         $this->information = $information;
     }
