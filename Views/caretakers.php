@@ -19,6 +19,7 @@ require_once '../vendor/autoload.php';
 include_once 'includes/header.php'?>
 
 <form action="./form.php" method="get" class="mt-3 ms-3">
+    <input type="hidden" name="function" value="add">
     <input type="hidden" value="caretaker" name="type">
     <input type="submit" class="btn btn-primary" value="Ajouter un soignant">
 </form>

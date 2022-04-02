@@ -17,7 +17,7 @@ class Caretaker
     private string $picture;
     private string $specialty;
     private int|null $superior;
-    private string|null $exit;
+    private string|null $exitDate;
     private string|null $information;
 
     public function __construct($id)
@@ -34,14 +34,14 @@ class Caretaker
         $this->lastname         = $result['lastname'];
         $this->arrival          = $result['arrival'];
         $this->gender           = $result['gender'];
-        $this->number           = $result['number'];
+        $this->number           = intVal($result['number']);
         $this->email            = $result['email'];
-        $this->picture          = $result['picture'];
+        $this->picture          = $result['picture'] == null ? '':$result['picture'];
         $this->specialty        = $result['specialty'];
         $this->superior         = $result['superior'];
-        $this->exit             = $result['exit'];
+        $this->exitDate         = $result['exitDate'];
         $this->information      = $result['information'];
-        $this->nbrEnclosureMax  =$result['nbrEnclosureMax'];
+        $this->nbrEnclosureMax  = intVal($result['nbrEnclosureMax']);
 
         $pdo = null;
     }
@@ -132,9 +132,9 @@ class Caretaker
     /**
      * @return string|null
      */
-    public function getExit(): string|null
+    public function getExitDate(): string|null
     {
-        return $this->exit;
+        return $this->exitDate;
     }
 
     /**
@@ -236,11 +236,11 @@ class Caretaker
     }
 
     /**
-     * @param string|null $exit
+     * @param string|null $exitDate
      */
-    public function setExit(string|null $exit): void
+    public function setExitDate(string|null $exitDate): void
     {
-        $this->exit = $exit;
+        $this->exitDate = $exitDate;
     }
 
     /**

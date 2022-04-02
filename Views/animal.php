@@ -26,7 +26,19 @@ $animals    = AnimalsRepository::getAnimalSameEnclosures($animal->getId());
 ?>
 
 <h1 class="text-center my-5"><?= ucfirst($animal->getName()) ?></h1>
-
+<div class="d-flex align-items-center justify-content-end ms-4">
+    <form action="/Controllers/AnimalController.php" method="post" class="me-4">
+        <input type="hidden" name="function" value="delete">
+        <input type="hidden" name="id" value="<?= $animal->getId() ?>">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+    <form action="./form.php" method="get">
+        <input type="hidden" name="type" value="animal">
+        <input type="hidden" name="function" value="modify">
+        <input type="hidden" name="id" value="<?= $animal->getId() ?>">
+        <button type="submit" class="btn btn-warning">Modifier</button>
+    </form>
+</div>
 <div class="container-fluid d-flex align-items-center justify-content-center">
     <img src="../assets/img/loup.jpeg" alt="" style="width: 65vw; height: auto">
     <div class="ps-5">

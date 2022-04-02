@@ -24,7 +24,19 @@ include_once 'includes/header.php';
 $caretaker = new Caretaker($_GET['id']);
 $animals = CaretakerRepository::getAnimals($caretaker->getId());
 ?>
-
+<div class="d-flex align-items-center justify-content-end ms-4">
+    <form action="/Controllers/AnimalController.php" method="post" class="me-4">
+        <input type="hidden" name="function" value="delete">
+        <input type="hidden" name="id" value="<?= $caretaker->getId() ?>">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+    <form action="./form.php" method="get">
+        <input type="hidden" name="type" value="caretaker">
+        <input type="hidden" name="function" value="modify">
+        <input type="hidden" name="id" value="<?= $caretaker->getId() ?>">
+        <button type="submit" class="btn btn-warning">Modifier</button>
+    </form>
+</div>
 <h1 class="text-center my-5"><?= ucfirst($caretaker->getFirstname()) .' '. ucfirst($caretaker->getLastname()) ?></h1>
 
 <div class="container-fluid d-flex align-items-center justify-content-center">

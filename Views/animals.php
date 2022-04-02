@@ -21,6 +21,7 @@ include_once 'includes/header.php' ?>
 
 <form action="./form.php" method="get" class="mt-3 ms-3">
     <input type="hidden" value="animal" name="type">
+    <input type="hidden" value="add" name="function">
     <input type="submit" class="btn btn-primary" value="Ajouter un animal">
 </form>
 
